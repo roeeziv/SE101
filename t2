@@ -1,0 +1,44 @@
+public class Task2 {
+	
+	// Task 2.1
+	public static boolean hasFriend(int[] friends, int k){
+		   boolean ans = false;
+		for (int i = 0 ; i < friends.length & !ans ; i=i+1) {  //if we find k we will exit the loop
+			if (friends[i]==k)  //check if k exist
+				ans=true;
+		}
+		   return ans;
+	}
+	
+	// Task 2.2
+	public static boolean isLegalFriendsList(int[][] friendsList){
+	   boolean ans = true;
+	   //first we will do the first 3 checks by definition
+	   if(friendsList==null)
+		   throw new IllegalArgumentException("list can't be null"); //by definition
+		for (int i = 0; i < friendsList.length; i=i+1) {
+			if(friendsList[i]==null)
+				throw new IllegalArgumentException("can't have null array"); // by definition
+			for (int j = 0; j < friendsList[i].length ; i=i+1) {
+				if (friendsList[i][j]<0 | friendsList[i][j]> friendsList.length-1)
+					throw new IllegalArgumentException("not valid value");   //by definition
+			}
+		}
+		for (int i = 0; i < friendsList.length & ans; i=i+1) {  // checking valid definition of social network
+			if(hasFriend(friendsList[i], i ))  //if 'i' is friend of itself
+				ans=false;
+			for (int j = 0; j < friendsList[i].length & ans; j=j+1) {
+				if (hasFriend(friendsList[i],j )!= hasFriend(friendsList[j],i ))  //check if i is friend of j then its opposite
+					ans=false;
+			}
+		}
+	   return ans;
+	}
+	
+	// Task 2.3
+	public static boolean isLegalFriendsMatrix(boolean[][] friendsMatrix) {
+		boolean ans = false;    
+		return ans;
+	}    
+
+}
