@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+
+
+public class Task1 {
+
+    // Task 1.1
+    public static int[] init() {
+        Scanner myScanner = new Scanner(System.in);
+        int n = myScanner.nextInt();
+        if(n<1)
+            throw new IllegalArgumentException("n should be grater than 1");
+        int[] arr= new int[n];   // this array will get all the n grades
+        for (int i = 0 ; i < n ; i=i+1) {
+            int grade= myScanner.nextInt();
+            if(grade<0)   //each grade must be 0 or more
+                throw new IllegalArgumentException("all grades must be non-negative");
+            arr[i]=grade;   //put each grade in its place
+        }
+        return arr;
+    }
+
+    // Task 1.2
+    public static int[] histogramCreate(int[] grades) {
+        Scanner myScanner = new Scanner(System.in);
+        int m= myScanner.nextInt();
+        int[] histogram= new int[m+1];  // m+1 because its 0 to m include.
+        for (int i = 0 ; i <grades.length ; i=i+1) {
+            if(grades[i]>m)
+                throw new IllegalArgumentException("not legal grade");  // m is the max grade possible
+            histogram[grades[i]]=histogram[grades[i]]+1;
+        }
+        return histogram;
+    }
+
+    // Task 1.3
+    public static int getMostCommonGrade(int[] histogram) {
+        int mostCommon = histogram[0];  // assume that the first garde is the most common until we find different
+        for (int i = 1 ; i <histogram.length ; i=i+1) {
+            int check= histogram[i];
+            if (check>mostCommon) //it means we have new most common grade
+                mostCommon=check;  // update value
+        }
+        return mostCommon;
+    }
+
+    // Task 1.4
+    public static int getLeastCommonGrade(int[] histogram) {
+        int leastCommon = histogram[0];  // assume that the first garde is the least common until we find different
+        for (int i = 1 ; i <histogram.length ; i=i+1) {
+            int check= histogram[i];
+            if (check<leastCommon) //it means we have new least common grade
+                leastCommon=check;  // update value
+        }
+        return leastCommon;
+    }
+}
